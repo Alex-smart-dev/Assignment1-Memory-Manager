@@ -128,7 +128,7 @@ void list_display(Node** head)
     printf("[");
     while (walker->next != NULL)
     {
-        printf("%" PRIu16, walker->data);
+        printf("%" PRIu16", " , walker->data);
         walker = walker->next;
     }
     printf("%" PRIu16, walker->data);
@@ -137,7 +137,24 @@ void list_display(Node** head)
 
 void list_display_range(Node** head, Node* start_node, Node* end_node)
 {
+    if (*head == NULL)
+    {
+        return;
+    }
 
+    if (start_node == NULL)
+    {
+        start_node = *head;
+    }
+
+    printf("[");
+    while (start_node->next != end_node)
+    {
+        printf("%" PRIu16", ", start_node->data);
+        start_node = start_node->next;
+    }
+    printf("%" PRIu16, start_node->data);
+    printf("]");
 }
 
 int list_count_nodes(Node** head)
