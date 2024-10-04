@@ -15,10 +15,10 @@ void list_init(Node** head, size_t size)
 
 void list_insert(Node** head, uint16_t data)
 {
-    
+
 }
 
-void list_insert_after(Node* prev_node, uint16_t data)<
+void list_insert_after(Node* prev_node, uint16_t data)
 {
 
 }
@@ -35,7 +35,7 @@ void list_delete(Node** head, uint16_t data)
 
 Node* list_search(Node** head, uint16_t data)
 {
-
+    return NULL;
 }
 
 void list_display(Node** head)
