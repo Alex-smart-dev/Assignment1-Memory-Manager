@@ -113,6 +113,7 @@ Node* list_search(Node** head, uint16_t data)
         {
             return walker;
         }
+        walker = walker->next;
     }
     return NULL;
 }
@@ -149,7 +150,7 @@ void list_cleanup(Node** head)
 
 }
 
-void Tmain()
+void tmain()
 {
 
 }
