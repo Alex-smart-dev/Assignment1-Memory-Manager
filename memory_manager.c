@@ -3,20 +3,22 @@
 #include <stdbool.h>
 #include "memory_manager.h"
 
+// Struct for storing start address, and amount of memory allocated for memmory block
 typedef struct MemObj
 {
-    void *start;
-    size_t amount;
+    void *start;    // Start address of all memory block
+    size_t amount;  // Size of memory allocated for memory block
 } MemObj;
 
 
-void *memoryBlock = NULL;
-size_t *memVis = NULL;
-MemObj *memObjs = NULL;
-size_t capacityMemObjs = 0;
-size_t sizeOfMemLeft = 0;
-size_t maxMem = 0;
+void *memoryBlock = NULL;   // Memory pull
+size_t *memVis = NULL;      // Dinamic array to "visualise" curent status of memory used. One boject = one memory block
+MemObj *memObjs = NULL;     // Variable to store all memory blocks
+size_t capacityMemObjs = 0; // Number of memory blocks in memObjs
+size_t sizeOfMemLeft = 0;   // Memory left for use
+size_t maxMem = 0;          // Maximum memory
 
+// Tries to find an empty space were you can fit a memory block of desired size
 size_t checkForPlace(size_t size)
 {
     int beginOfPlace = -1;
@@ -45,6 +47,7 @@ size_t checkForPlace(size_t size)
     return -1;    
 }
 
+// Checks for existence of memory block and returns it's position in memObjs if they do exist 
 int checkForObj(void *block)
 {
     for (size_t i = 0; i < capacityMemObjs; i++)
@@ -57,6 +60,7 @@ int checkForObj(void *block)
     return -1;
 }
 
+// Eddits memory "visualisation" array 
 void editMemVisSpace(size_t begin, size_t size, size_t emptyAdd)
 {
     for (size_t i = 0; i < size; i++)
@@ -64,11 +68,6 @@ void editMemVisSpace(size_t begin, size_t size, size_t emptyAdd)
         memVis[begin + i] = emptyAdd;
     }
 }
-
-// size_t posOfBlock(void *block)
-// {
-//     return (char*)block - (char*)memoryBlock;
-// }
 
 void addMemObj(size_t begin, size_t size)
 {
@@ -81,10 +80,6 @@ void addMemObj(size_t begin, size_t size)
     }
 
     editMemVisSpace(begin, size, 1);   
-    // for (size_t i = 0; i < size; i++)
-    // {
-    //     memVis[begin + i] = 1;
-    // }
     
     memObjs[capacityMemObjs-1].start = (char*)memoryBlock + begin;
     memObjs[capacityMemObjs-1].amount = size;
@@ -145,10 +140,6 @@ void mem_free(void* block)
     size_t posOfBlock = (char*)block - (char*)memoryBlock;
 
     editMemVisSpace(posOfBlock, memObjs[posOfObj].amount, 0);
-    // for (size_t i = posOfBlock; i < memObjs[posOfObj].amount; i++)
-    // {
-    //     memVis[i] = 0;
-    // }
     
     for (size_t i = posOfObj; i < capacityMemObjs-1; i++)
     {
@@ -173,7 +164,7 @@ void mem_free(void* block)
 
 }
 
-void* mem_resize(void* block, size_t size) //remove before last submit !!!!!!!!!!
+void* mem_resize(void* block, size_t size)
 {
     int posOfObj = checkForObj(block);
     if (posOfObj == -1)

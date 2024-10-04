@@ -5,6 +5,7 @@
 #include "linked_list.h"
 #include "memory_manager.h"
 
+
 void list_init(Node** head, size_t size)
 {
     mem_init(size);
@@ -75,7 +76,7 @@ void list_insert_before(Node** head, Node* next_node, uint16_t data)
     }
     else
     {
-        mem_free(newNode); // Prevent memory leak if node wasn't inserted
+        mem_free(newNode);
     }
 }
 
