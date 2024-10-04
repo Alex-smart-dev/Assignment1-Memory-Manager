@@ -1,12 +1,9 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stdint.h>
 #include <inttypes.h>
-
 
 typedef struct Node 
 {

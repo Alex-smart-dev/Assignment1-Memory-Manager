@@ -1,12 +1,10 @@
-#include <stdbool.h>
+//#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <stdint.h>
 #include <inttypes.h>
 #include "linked_list.h"
 #include "memory_manager.h"
-#include "common_defs.h" //remove before last submit !!!!!!!!!!
 
 void list_init(Node** head, size_t size)
 {
@@ -209,38 +207,4 @@ void list_cleanup(Node** head)
         mem_free(temp);
     }
     
-}
-
-void tmain() //remove before last submit !!!!!!!!!!
-{
-    printf_yellow("  Testing list edge cases ---> ");
-    Node *head = NULL;
-    list_init(&head, sizeof(Node) * 3);
-
-    // Insert at head
-    list_insert(&head, 10);
-    my_assert(head->data == 10);
-
-    // Insert after
-    Node *node = list_search(&head, 10);
-    list_insert_after(node, 20);
-    my_assert(node->next->data == 20);
-
-    // Insert before
-    list_insert_before(&head, node, 15);
-
-    my_assert(head->data == 15);
-    my_assert(head->next->data == 10);
-    my_assert(head->next->next->data == 20);
-
-    // Delete
-    list_delete(&head, 15);
-    my_assert(node->next->data == 20);
-
-    // Search
-    Node *found = list_search(&head, 20);
-    my_assert(found->data == 20);
-
-    list_cleanup(&head);
-    printf_green("[PASS].\n");
 }

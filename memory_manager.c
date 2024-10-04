@@ -1,9 +1,7 @@
-#include "memory_manager.h"
-#include "common_defs.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <assert.h>
+#include "memory_manager.h"
 
 typedef struct MemObj
 {
@@ -175,7 +173,7 @@ void mem_free(void* block)
 
 }
 
-void* mem_resize(void* block, size_t size)
+void* mem_resize(void* block, size_t size) //remove before last submit !!!!!!!!!!
 {
     int posOfObj = checkForObj(block);
     if (posOfObj == -1)
@@ -226,20 +224,4 @@ void mem_deinit()
     capacityMemObjs = 0;
     sizeOfMemLeft = 0;
     maxMem = 0;
-}
-
-void Tmain()
-{
-    printf_yellow("  Testing mem_alloc(0) and mem_free --->");
-    mem_init(1024);
-    void *block1 = mem_alloc(0);
-    my_assert(block1 != NULL);
-    void *block2 = mem_alloc(200);
-    my_assert(block2 != NULL);
-    my_assert(block1 == block2);
-
-    mem_free(block1);
-    mem_free(block2);
-    mem_deinit();
-    printf_green("[PASS].\n");
 }
