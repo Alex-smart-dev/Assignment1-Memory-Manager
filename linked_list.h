@@ -30,6 +30,8 @@ void list_display(Node** head);
 
 void list_display_range(Node** head, Node* start_node, Node* end_node);
 
+void list_cleanup(Node** head);
+
 
 
 #endif
