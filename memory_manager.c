@@ -114,6 +114,11 @@ void* mem_alloc(size_t size)
         sizeOfMemLeft -= size;
         return memoryBlock;
     }
+    else if (size == 0)
+    {
+        addMemObj(0, size);
+        return memoryBlock;
+    }
     else
     {
         size_t begin = checkForPlace(size);
